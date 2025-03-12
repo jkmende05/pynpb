@@ -78,3 +78,24 @@ def get_round_results(round: str, year: Optional[int] = None) -> pd.DataFrame:
         )
 
     return round_results
+
+def get_draft_results_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    data = get_draft_results(year)
+
+    draft_df = []
+
+    for round_name, df in data.items():
+        df['Round'] = round_name
+        draft_df.append(df)
+
+    all_draft_results = pd.concat(draft_df, ignore_index = True)
+
+    if (len(all_draft_results[all_draft_results['Team'] == team]) > 0):
+        return all_draft_results[all_draft_results['Team'] == team]
+    else:
+        team_names = all_draft_results['Team'].unique().tolist()
+        raise ValueError(
+            "Invalid input. Team could not be found. "
+            "Here is a list of valid inputs, which are all the teams that participated in the draft "
+            f"in {year}: {team_names}"
+        )
