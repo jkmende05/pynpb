@@ -5,7 +5,7 @@ import pandas as pd
 from typing import Optional, List
 from .utils import most_recent_season
 
-def get_html(year: int) -> str:
+def _get_html(year: int) -> str:
     if year > 2007:
         url = f'https://npb.jp/bis/eng/{year}/standings/'
         response = requests.get(url)
@@ -33,7 +33,7 @@ def get_pacific_standings(year: Optional[int] = None) -> pd.DataFrame:
             "Invalid input. Season for the year entered must have begun. It cannot be greater than the current year."
         )
 
-    html = get_html(year)
+    html = _get_html(year)
 
     if year > 2007:
         pacific_standings = pd.read_html(StringIO(html))[4]
@@ -74,7 +74,7 @@ def get_central_standings(year: Optional[int] = None) -> pd.DataFrame:
             "Invalid input. Season for the year entered must have begun. It cannot be greater than the current year."
         )
 
-    html = get_html(year)
+    html = _get_html(year)
 
     if year > 2007:
         central_standings = pd.read_html(StringIO(html))[2]
