@@ -3,6 +3,7 @@ from io import StringIO
 import pandas as pd
 
 from typing import Optional, List
+from .utils import most_recent_season
 
 def get_html(year: int) -> str:
     if year > 2007:
@@ -159,7 +160,7 @@ def get_combined_standings(year: Optional[int] = None) -> pd.DataFrame:
 def _get_full_team_names(standings: pd.DataFrame, league: str, year: int) -> pd.DataFrame:
     if league == 'pacific':
         standings['Team'] = standings['Team'].replace({'Seibu' : 'Saitama Seibu Lions', 'Orix' : 'Orix Buffaloes', 'Nippon-Ham' : 'Hokkaido Nippon-Ham Fighters',
-                                                        'Lotte' : 'Chiba Lotte Marines', 'Rakuten' : 'Tohoku Rakuten Golden Eagles', 'Softbank' :'Fukuoka Softbank Hawks'})
+                                                        'Lotte' : 'Chiba Lotte Marines', 'Rakuten' : 'Tohoku Rakuten Golden Eagles', 'Softbank' :'Fukuoka Softbank Hawks', 'ORIX' : 'Orix Buffaloes' })
     elif league == 'central':
         standings['Team'] = standings['Team'].replace({'Yomiuri' : 'Yomiuri Giants', 'Hanshin' : 'Hanshin Tigers', 'Chunichi' : 'Chunichi Dragons',
                                                         'Hiroshima' : 'Hiroshima Toyo Carp', 'Yakult' : 'Tokyo Yakult Swallows'})
