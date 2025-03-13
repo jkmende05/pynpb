@@ -158,7 +158,6 @@ def get_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     return batting_stats
 
 def get_batting_stats_for_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
-    session = requests.Session()  # Use a persistent session to speed up requests
 
     # Store `most_recent_season()` in a variable to avoid redundant calls
     current_season = most_recent_season()
