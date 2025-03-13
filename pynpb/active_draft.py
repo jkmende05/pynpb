@@ -7,22 +7,12 @@ from typing import List, Optional
 
 from bs4 import BeautifulSoup
 from .utils import most_recent_season
+from .data_sources.baseball_reference import baseball_reference_session
+
+session = baseball_reference_session()
 
 def _get_html(year: int) -> str:
     url = f'https://www.baseball-reference.com/bullpen/{year}_NPB_Active_draft'
-
-    headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Connection": "keep-alive",
-    "Referer": "https://www.baseball-reference.com/",
-    "Upgrade-Insecure-Requests": "1",
-    "TE": "Trailers"
-    }
-
-    session = requests.Session()
-    session.headers.update(headers)
 
     response = session.get(url)
 
