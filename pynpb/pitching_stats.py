@@ -225,4 +225,9 @@ def get_pitching_stats_for_team(team: str, year: Optional[int] = None) -> pd.Dat
             pitching_stats = pd.concat([pitching_stats, temp_df], ignore_index=True)
             break  # Stop iterating once the team is found
 
-    return pitching_stats
+    if (len(pitching_stats) > 0):
+        return pitching_stats
+    else:
+        raise ValueError(
+            "Invalid input. Team could not be found."
+        )
