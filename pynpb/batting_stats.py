@@ -206,4 +206,9 @@ def get_batting_stats_for_team(team: str, year: Optional[int] = None) -> pd.Data
             batting_stats = pd.concat([batting_stats, temp_df], ignore_index=True)
             break  # Stop iterating once the team is found
 
-    return batting_stats
+    if (len(batting_stats) > 0):
+        return batting_stats
+    else:
+        raise ValueError(
+            "Invalid input. Team could not be found."
+        )
