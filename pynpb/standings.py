@@ -4,6 +4,9 @@ import pandas as pd
 
 from typing import Optional, List
 from .utils import most_recent_season
+from .data_sources.baseball_reference import baseball_reference_session
+
+session = baseball_reference_session()
 
 def _get_html(year: int) -> str:
     if year > 2007:
@@ -14,7 +17,7 @@ def _get_html(year: int) -> str:
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
-        response = requests.get(url, headers=headers)
+        response = session.get(url)
 
     html = response.text
     return html
