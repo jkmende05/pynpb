@@ -7,7 +7,6 @@ from typing import List, Optional
 
 from bs4 import BeautifulSoup
 
-
 from .utils import most_recent_season
 from .data_sources.baseball_reference import baseball_reference_session
 
