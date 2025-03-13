@@ -2,3 +2,4 @@ from .standings import get_pacific_standings, get_central_standings, get_all_sta
 from .utils import most_recent_season
 from .amateur_draft import get_draft_round_names, get_draft_results, get_round_results, get_draft_results_by_team
 from .active_draft import get_active_draft_results
+from .batting_stats import get_pacific_batting_stats, get_central_batting_stats, get_batting_stats, get_batting_stats_for_team
