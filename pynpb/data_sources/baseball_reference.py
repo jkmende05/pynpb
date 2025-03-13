@@ -8,7 +8,7 @@ import requests
 from ..data_helpers import Singleton
 
 class baseball_reference_session(Singleton):
-    def __init__(self, max_requests_per_minute: int = 10) -> None:
+    def __init__(self, max_requests_per_minute: int = 18) -> None:
         self.max_requests_per_minute = max_requests_per_minute
         self.last_request: Optional[datetime.datetime] = None
         self.session = requests.Session()
