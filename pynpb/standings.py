@@ -9,14 +9,12 @@ from .data_sources.baseball_reference import baseball_reference_session
 session = baseball_reference_session()
 
 def _get_html(year: int) -> str:
+    # if year is before 2007, get data from npb official site, if not use baseball reference
     if year > 2007:
         url = f'https://npb.jp/bis/eng/{year}/standings/'
         response = requests.get(url)
     else:
         url = f'http://www.baseball-reference.com/bullpen/{year}_in_Japanese_Baseball'
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-        }
         response = session.get(url)
 
     html = response.text
@@ -52,6 +50,7 @@ def get_pacific_standings(year: Optional[int] = None) -> pd.DataFrame:
 
     html = _get_html(year)
 
+    # Get table from html code and apply modifications to make it easier to read and use
     if year > 2007:
         pacific_standings = pd.read_html(StringIO(html))[4]
         pacific_standings.columns = pacific_standings.iloc[1]
@@ -107,6 +106,7 @@ def get_central_standings(year: Optional[int] = None) -> pd.DataFrame:
 
     html = _get_html(year)
 
+    # Get table from html code and apply modifications to make it easier to read and use
     if year > 2007:
         central_standings = pd.read_html(StringIO(html))[2]
         central_standings.columns = central_standings.iloc[1]
@@ -203,6 +203,7 @@ def get_combined_standings(year: Optional[int] = None) -> pd.DataFrame:
 
     overall_standings = pd.concat([central_standings, pacific_standings], axis=0, ignore_index = True)
 
+    # Combine central and pacific standings, and recalculate games behind
     overall_standings = overall_standings.sort_values(by='PCT', ascending=False)
     overall_standings = overall_standings.drop('GB', axis = 1)
     overall_standings['W'] = overall_standings['W'].astype(int)

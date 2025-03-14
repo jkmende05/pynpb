@@ -36,6 +36,7 @@ def _get_stat_links(url: str, year: int) -> List:
     return team_links
 
 def _get_pacific_team_links(year: int) -> List:
+    # Get links for pacific teams based on year
     url = f'https://www.baseball-reference.com/register/league.cgi?code=JPPL&class=Fgn'
 
     team_links = _get_stat_links(url, year)
@@ -43,6 +44,7 @@ def _get_pacific_team_links(year: int) -> List:
     return team_links
 
 def _get_central_team_links(year: int) -> List:
+    # Get links to get central team stats based on year
     url = f'https://www.baseball-reference.com/register/league.cgi?code=JPCL&class=Fgn'
 
     team_links = _get_stat_links(url, year)
@@ -50,6 +52,7 @@ def _get_central_team_links(year: int) -> List:
     return team_links
 
 def _get_team_names(url: str, year: int) -> str:
+    # Get a team's name based on url and year
     response = session.get(url)
 
     html = response.text
@@ -66,6 +69,7 @@ def _get_team_names(url: str, year: int) -> str:
     return team_name
 
 def _get_1b_hidden_table(html: str) -> pd.DataFrame:
+    # First base fielding data is the second hidden table on each page
     soup = BeautifulSoup(html, "html.parser")
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -102,6 +106,7 @@ def get_central_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -117,6 +122,7 @@ def get_central_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_central_team_links(year)
     first_base_fielding_stats = pd.DataFrame()
 
+    # For each link and team, get fielding stats and combine into one data frame
     for link in team_links:
         url = link
         response = session.get(url)
@@ -150,6 +156,7 @@ def get_pacific_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -165,6 +172,7 @@ def get_pacific_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_pacific_team_links(year)
     first_base_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get fielding stats and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -202,6 +210,7 @@ def get_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     central_1b_stats = get_central_1b_fielding_stats(year)
 
+    # Combine central stats and pacific stats into one dataframe
     fielding_1b_stats = pd.concat([central_1b_stats, pacific_1b_stats], ignore_index = True)
 
     return fielding_1b_stats
@@ -261,11 +270,13 @@ def get_1b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
     if (len(first_base_fielding_stats) > 0):
         return first_base_fielding_stats
     else:
+        # If team not found in data, return value error
         raise ValueError(
             "Invalid input. Team could not be found."
         )
 
 def _get_2b_hidden_table(html: str) -> pd.DataFrame:
+    # Second base fielding data is the third hidden table on the page
     soup = BeautifulSoup(html, "html.parser")
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -302,6 +313,7 @@ def get_central_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -317,6 +329,7 @@ def get_central_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_central_team_links(year)
     second_base_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get stats and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -350,6 +363,7 @@ def get_pacific_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -365,6 +379,7 @@ def get_pacific_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_pacific_team_links(year)
     second_base_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get stats and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -402,6 +417,7 @@ def get_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     central_2b_stats = get_central_2b_fielding_stats(year)
 
+    # Combine central and pacific stats into one dataframe
     fielding_2b_stats = pd.concat([central_2b_stats, pacific_2b_stats], ignore_index = True)
 
     return fielding_2b_stats
@@ -460,11 +476,13 @@ def get_2b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
     if (len(second_base_fielding_stats) > 0):
         return second_base_fielding_stats
     else:
+        # If team not found in data, return value error
         raise ValueError(
             "Invalid input. Team could not be found."
         )
 
 def _get_3b_hidden_table(html: str) -> pd.DataFrame:
+    # Third base data is the fourth hidden table in the html code 
     soup = BeautifulSoup(html, "html.parser")
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -501,6 +519,7 @@ def get_central_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -516,6 +535,7 @@ def get_central_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_central_team_links(year)
     third_base_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get stats and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -549,6 +569,7 @@ def get_pacific_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -564,6 +585,7 @@ def get_pacific_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_pacific_team_links(year)
     third_base_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get stats and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -601,6 +623,7 @@ def get_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     central_3b_stats = get_central_3b_fielding_stats(year)
 
+    # Combine central and pacific stats into one
     third_base_fielding_stats = pd.concat([central_3b_stats, pacific_3b_stats], ignore_index = True)
 
     return third_base_fielding_stats
@@ -659,11 +682,13 @@ def get_3b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
     if (len(third_base_fielding_stats) > 0):
         return third_base_fielding_stats
     else:
+        # If team is not found, return value error
         raise ValueError(
             "Invalid input. Team could not be found."
         )
 
 def _get_ss_hidden_table(html: str) -> pd.DataFrame:
+    # Shortstop data is the fifth hidden table in the html code
     soup = BeautifulSoup(html, "html.parser")
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -700,6 +725,7 @@ def get_central_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -715,6 +741,7 @@ def get_central_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_central_team_links(year)
     shortstop_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get stats and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -748,6 +775,7 @@ def get_pacific_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -763,6 +791,7 @@ def get_pacific_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_pacific_team_links(year)
     shortstop_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get stats and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -800,6 +829,7 @@ def get_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     central_ss_stats = get_central_ss_fielding_stats(year)
 
+    # Combine central and pacific stats into one dataframe and return
     shortstop_fielding_stats = pd.concat([central_ss_stats, pacific_ss_stats], ignore_index = True)
 
     return shortstop_fielding_stats
@@ -825,6 +855,7 @@ def get_ss_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
     current_season = most_recent_season()
     
     if year is None:
+        # If year is none, get most recent season
         year = current_season
     if year < 1950:
         raise ValueError(
@@ -858,11 +889,13 @@ def get_ss_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
     if (len(shortstop_fielding_stats) > 0):
         return shortstop_fielding_stats
     else:
+        # If team not found, return value error
         raise ValueError(
             "Invalid input. Team could not be found."
         )
 
 def _get_of_hidden_table(html: str) -> pd.DataFrame:
+    # Outfield data is the sixth hidden table in the html code
     soup = BeautifulSoup(html, "html.parser")
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -899,6 +932,7 @@ def get_central_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -914,6 +948,7 @@ def get_central_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_central_team_links(year)
     outfield_fielding_stats = pd.DataFrame()
 
+    # For each time and link, get data and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -947,6 +982,7 @@ def get_pacific_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -962,6 +998,7 @@ def get_pacific_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_pacific_team_links(year)
     outfield_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get stats and return as one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -999,6 +1036,7 @@ def get_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     central_of_stats = get_central_of_fielding_stats(year)
 
+    # Combine pacific and central stats into one dataframe
     outfield_fielding_stats = pd.concat([central_of_stats, pacific_of_stats], ignore_index = True)
 
     return outfield_fielding_stats
@@ -1024,6 +1062,7 @@ def get_of_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
     current_season = most_recent_season()
     
     if year is None:
+        # If year is none, get most recent season
         year = current_season
     if year < 1950:
         raise ValueError(
@@ -1057,11 +1096,13 @@ def get_of_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
     if (len(of_fielding_stats) > 0):
         return of_fielding_stats
     else:
+        # If team not found, return value error
         raise ValueError(
             "Invalid input. Team could not be found."
         )
 
 def _get_p_hidden_table(html: str) -> pd.DataFrame:
+    # Pitcher fielding data is the seventh hidden table
     soup = BeautifulSoup(html, "html.parser")
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -1098,6 +1139,7 @@ def get_central_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -1113,6 +1155,7 @@ def get_central_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_central_team_links(year)
     pitching_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get data and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -1146,6 +1189,7 @@ def get_pacific_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -1161,6 +1205,7 @@ def get_pacific_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_pacific_team_links(year)
     pitching_fielding_stats = pd.DataFrame()
 
+    # For each time and link, get stats and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -1198,6 +1243,7 @@ def get_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     central_p_stats = get_central_p_fielding_stats(year)
 
+    # Get pacific and central stats, and combine into one dataframe
     pitching_fielding_stats = pd.concat([central_p_stats, pacific_p_stats], ignore_index = True)
 
     return pitching_fielding_stats
@@ -1223,6 +1269,7 @@ def get_p_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.Da
     current_season = most_recent_season()
     
     if year is None:
+        # If year is None, get most recent season
         year = current_season
     if year < 1950:
         raise ValueError(
@@ -1256,11 +1303,13 @@ def get_p_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.Da
     if (len(pitching_fielding_stats) > 0):
         return pitching_fielding_stats
     else:
+        # If team not found, return value error
         raise ValueError(
             "Invalid input. Team could not be found."
         )
 
 def _get_c_hidden_table(html: str) -> pd.DataFrame:
+    # Catcher fielding data is the eighth hidden table
     soup = BeautifulSoup(html, "html.parser")
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -1297,6 +1346,7 @@ def get_central_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -1312,6 +1362,7 @@ def get_central_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_central_team_links(year)
     catching_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get stats and cobine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -1345,6 +1396,7 @@ def get_pacific_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -1360,6 +1412,7 @@ def get_pacific_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_pacific_team_links(year)
     catching_fielding_stats = pd.DataFrame()
 
+    # For each team and link, get data and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -1397,6 +1450,7 @@ def get_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     central_c_stats = get_central_c_fielding_stats(year)
 
+    # Get central and pacific stats, and combine into one dataframe
     catching_fielding_stats = pd.concat([central_c_stats, pacific_c_stats], ignore_index = True)
 
     return catching_fielding_stats
@@ -1422,6 +1476,7 @@ def get_c_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.Da
     current_season = most_recent_season()
     
     if year is None:
+        # If year is none, get most recent season
         year = current_season
     if year < 1950:
         raise ValueError(
@@ -1455,6 +1510,7 @@ def get_c_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.Da
     if (len(catching_fielding_stats) > 0):
         return catching_fielding_stats
     else:
+        # If team not found, return value error
         raise ValueError(
             "Invalid input. Team could not be found."
         )

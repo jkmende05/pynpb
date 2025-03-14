@@ -104,6 +104,7 @@ def get_pacific_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     html = response.text
     pacific_team_pitching = _get_second_hidden_table(html)
 
+    # Get team stats and apply modifications to make it easier to read
     pacific_team_pitching = pacific_team_pitching.drop(columns=['Aff'], errors='ignore')
     pacific_team_pitching = pacific_team_pitching.rename(columns={'Tm' : 'Team', 'Finals' : 'Team'})
     pacific_team_pitching = pacific_team_pitching.iloc[:-1]  # Keeps all rows except the last one
@@ -144,6 +145,7 @@ def get_central_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     html = response.text
     central_team_pitching = _get_second_hidden_table(html)
 
+    # Get team stats and apply modifications to make it easier to read
     central_team_pitching = central_team_pitching.drop(columns=['Aff'], errors='ignore')
     central_team_pitching = central_team_pitching.rename(columns={'Tm' : 'Team', 'Finals' : 'Team'})
     central_team_pitching = central_team_pitching.iloc[:-1]  # Keeps all rows except the last one

@@ -13,6 +13,7 @@ from .data_sources.baseball_reference import baseball_reference_session
 session = baseball_reference_session()
 
 def _get_roster_hidden_table(html: str) -> pd.DataFrame:
+    # Roster data is the ninth hidden table in the html code
     soup = BeautifulSoup(html, "html.parser")
 
     comments = soup.find_all(string=lambda text: isinstance(text, Comment))
@@ -64,6 +65,7 @@ def get_pacific_player_data(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_pacific_team_links(year)
     roster_data = pd.DataFrame()
 
+    # For each team and link, get data and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -110,6 +112,7 @@ def get_central_player_data(year: Optional[int] = None) -> pd.DataFrame:
     team_links = _get_central_team_links(year)
     roster_data = pd.DataFrame()
 
+    # For each team and link, get data and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -176,6 +179,7 @@ def get_player_data_by_team(team: str, year: Optional[int] = None) -> pd.DataFra
         player_data = player_data[player_data['Team'] == team].reset_index()
     else:
         team_names = player_data['Team'].unique().tolist()
+        # If team not found, return value error and a list of possible valid inputs
         raise ValueError(
             "Invalid input. Team could not be found. "
             "Here is a list of valid inputs, which are all the teams that participated in the draft "

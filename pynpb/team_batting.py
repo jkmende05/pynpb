@@ -13,6 +13,7 @@ from .data_sources.baseball_reference import baseball_reference_session
 session = baseball_reference_session()
 
 def _get_link(url: str, year: int) -> str:
+    # Based on column and row in html table, return list of links
     response = session.get(url)
 
     html = response.text
@@ -103,6 +104,7 @@ def get_pacific_team_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     html = response.text
     pacific_team_batting = _get_first_hidden_html_table(html)
 
+    # Get team stats and apply modifications to make it easier to read
     pacific_team_batting = pacific_team_batting.drop(columns=['Aff'], errors='ignore')
     pacific_team_batting = pacific_team_batting.rename(columns={'Tm' : 'Team', 'Finals' : 'Team'})
     pacific_team_batting = pacific_team_batting.iloc[:-1]  # Keeps all rows except the last one
@@ -143,6 +145,7 @@ def get_central_team_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     html = response.text
     central_team_batting = _get_first_hidden_html_table(html)
 
+    # Get team stats and apply modifications to make it easier to read
     central_team_batting = central_team_batting.drop(columns=['Aff'], errors='ignore')
     central_team_batting = central_team_batting.rename(columns={'Tm' : 'Team', 'Finals' : 'Team'})
     central_team_batting = central_team_batting.iloc[:-1]  # Keeps all rows except the last one
@@ -167,6 +170,7 @@ def get_team_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     central_team_batting = get_central_team_batting_stats(year)
     pacific_team_batting = get_pacific_team_batting_stats(year)
 
+    # Get central and pacific stats, and combine into one dataframe
     team_batting_stats = pd.concat([central_team_batting, pacific_team_batting], ignore_index = True)
 
     return team_batting_stats

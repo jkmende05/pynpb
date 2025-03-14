@@ -103,6 +103,7 @@ def get_pacific_team_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     html = response.text
     pacific_team_fielding = _get_third_hidden_table(html)
 
+    # Get team stats and apply modifications to make it easier to read
     pacific_team_fielding = pacific_team_fielding.drop(columns=['Aff', 'Attendance'], errors='ignore')
     pacific_team_fielding = pacific_team_fielding.rename(columns={'Tm' : 'Team', 'PO.1' : 'PO', 'Finals' : 'Team'})
     pacific_team_fielding = pacific_team_fielding.iloc[:-1]  # Keeps all rows except the last one
@@ -142,6 +143,7 @@ def get_central_team_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     html = response.text
     central_team_fielding = _get_third_hidden_table(html)
 
+    # Get team stats and apply modifications to make it easier to read
     central_team_fielding = central_team_fielding.drop(columns=['Aff', 'Attendance'], errors='ignore')
     central_team_fielding = central_team_fielding.rename(columns={'Tm' : 'Team', 'Finals' : 'Team', 'PO.1' : 'PO'})
     central_team_fielding = central_team_fielding.iloc[:-1]  # Keeps all rows except the last one
@@ -166,6 +168,7 @@ def get_team_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     central_team_fielding = get_central_team_fielding_stats(year)
     pacific_team_fielding = get_pacific_team_fielding_stats(year)
 
+    # Get central and pacific stats, and combine into one dataframe
     team_fielding_stats = pd.concat([central_team_fielding, pacific_team_fielding], ignore_index=True)
 
     return team_fielding_stats

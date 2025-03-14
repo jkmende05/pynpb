@@ -12,6 +12,7 @@ from .data_sources.baseball_reference import baseball_reference_session
 session = baseball_reference_session()
 
 def _get_html(year: int) -> str:
+    # Pull html from url and return as a string
     url = f'https://www.baseball-reference.com/bullpen/{year}_NPB_Active_draft'
 
     response = session.get(url)
@@ -33,6 +34,7 @@ def get_active_draft_results(year: Optional[int] = None) -> pd.DataFrame:
     A pandas dataframe with the active draft results from the year entered.
     """
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1965:
         raise ValueError(
@@ -47,6 +49,7 @@ def get_active_draft_results(year: Optional[int] = None) -> pd.DataFrame:
 
     html = _get_html(year)
 
+    # Get first table from the html, which is the active draft results
     draft_df = pd.read_html(StringIO(html))[0]
 
     if len(draft_df) == 0:
@@ -55,6 +58,7 @@ def get_active_draft_results(year: Optional[int] = None) -> pd.DataFrame:
             "No draft results found. Either draft hasn't happened yet or no draft took place this year."
         )
 
+    # Drop empty notes column
     draft_df = draft_df.drop('Notes', axis=1)
 
     return draft_df

@@ -13,6 +13,7 @@ from .data_sources.baseball_reference import baseball_reference_session
 session = baseball_reference_session()
 
 def _get_html(year: int) -> str:
+    # Pull html from url and return as a string
     url = f'https://www.baseball-reference.com/bullpen/{year}_NPB_Amateur_Draft'
 
     response = session.get(url)
@@ -20,6 +21,7 @@ def _get_html(year: int) -> str:
     return response.text
 
 def _get_draft_round_names(year: int, html: str) -> List:
+    # Get a list of the names of the draft rounds
     soup = BeautifulSoup(html, 'html.parser')
 
     draft_rounds = soup.find_all('span', class_='mw-headline')
@@ -39,10 +41,11 @@ def get_draft_results(year: Optional[int] = None) -> dict:
 
     Returns
     -------
-    A pandas dataframe with the amateur draft results from the year entered.
+    A dict with pandas dataframe with the amateur draft results from the year entered.
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1965:
         raise ValueError(
@@ -57,6 +60,7 @@ def get_draft_results(year: Optional[int] = None) -> dict:
 
     html = _get_html(year)
 
+    # Get the tables for each round and convert to a dict with the identifier being the draft round name
     datasets = pd.read_html(StringIO(html))[0 : len(get_draft_round_names(year, html))]
     datasets = [df.fillna(" ") for df in datasets]
 
@@ -90,6 +94,7 @@ def get_round_results(round: str, year: Optional[int] = None) -> pd.DataFrame:
 
     draft_results = get_draft_results(year)
 
+    # Get dataframe for the desired round, if not found, return ValueError
     try:
         round_results = draft_results[round]
     except:
@@ -126,8 +131,10 @@ def get_draft_results_by_team(team: str, year: Optional[int] = None) -> pd.DataF
         df['Round'] = round_name
         draft_df.append(df)
 
+    # Get one dataframe with all draft results
     all_draft_results = pd.concat(draft_df, ignore_index = True)
 
+    # Get draft results for team, if not found, return value error and list of team names
     if (len(all_draft_results[all_draft_results['Team'] == team]) > 0):
         return all_draft_results[all_draft_results['Team'] == team]
     else:

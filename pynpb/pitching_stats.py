@@ -13,6 +13,7 @@ from .data_sources.baseball_reference import baseball_reference_session
 session = baseball_reference_session()
 
 def _get_stat_links(url: str, year: int) -> List:
+    # Return list of team links based on links found in column and row of table
     response = session.get(url)
 
     html = response.text
@@ -50,7 +51,7 @@ def _get_central_team_links(year: int) -> List:
     return team_links
 
 def _get_team_names(url: str, year: int) -> str:
-
+    # Get team names from the html code
     response = session.get(url)
 
     html = response.text
@@ -82,6 +83,7 @@ def get_pacific_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -98,6 +100,7 @@ def get_pacific_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     pitching_stats = pd.DataFrame()
     
+    # For each team and link, get data and combine into one dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -137,6 +140,7 @@ def get_central_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -153,6 +157,7 @@ def get_central_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     pitching_stats = pd.DataFrame()
     
+    # For each team and link, get data and combine into a single dataframe
     for link in team_links:
         url = link
         response = session.get(url)
@@ -177,6 +182,7 @@ def get_central_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pitching_stats
 
 def _get_first_hidden_html_table(html: str) -> pd.DataFrame:
+    # Pitching data is the first hidden table in the html code
     # Parse the HTML
     soup = BeautifulSoup(html, "html.parser")
 
@@ -287,6 +293,7 @@ def get_pitching_stats_for_team(team: str, year: Optional[int] = None) -> pd.Dat
     if (len(pitching_stats) > 0):
         return pitching_stats
     else:
+        # If team not found, return value error
         raise ValueError(
             "Invalid input. Team could not be found."
         )

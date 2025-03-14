@@ -14,10 +14,17 @@ DATE_FORMAT = "%Y-%m-%d"
 
 @ functools.lru_cache()
 def most_recent_season() -> int:
-    '''
+    """
     Find the most recent season. This will either be this year if the season has started or last year
     if the current season has not yet started 
-    '''
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+    Returns an integer for the most recent season
+    """
 
     recent_season_dates = date_range(
         (datetime.today() - timedelta(weeks=52)).date(),
@@ -29,11 +36,18 @@ def most_recent_season() -> int:
 
 
 def date_range(start: date, stop: date, step: int = 1, verbose: bool = True) -> Iterator[Tuple[date, date]]:
-    '''
+    """
     Iterate over dates. Skip the offseason dates. Returns a pair of dates for beginning and end of each segment.
     Range is inclusive of the stop date.
     If verbose is enabled, it will print a message if it skips offseason dates.
-    '''
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+    Returns a range of dates in the form of a tuple
+    """
 
     low = start
 

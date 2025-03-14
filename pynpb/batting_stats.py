@@ -19,6 +19,7 @@ def _get_stat_links(url: str, year: int) -> List:
     soup = BeautifulSoup(html, 'html.parser')
     table = soup.find_all('table')
 
+    # Get a list of the links to each of the teams
     table = table[0]
     # Extract links from the 'team' column where 'year' matches
     team_links = []
@@ -36,6 +37,7 @@ def _get_stat_links(url: str, year: int) -> List:
     return team_links
 
 def _get_pacific_team_links(year: int) -> List:
+    # Get list to pacific team stats from desired year using this link
     url = f'https://www.baseball-reference.com/register/league.cgi?code=JPPL&class=Fgn'
 
     team_links = _get_stat_links(url, year)
@@ -43,6 +45,7 @@ def _get_pacific_team_links(year: int) -> List:
     return team_links
 
 def _get_central_team_links(year: int) -> List:
+    # Get list to central team stats from desired year using this link
     url = f'https://www.baseball-reference.com/register/league.cgi?code=JPCL&class=Fgn'
 
     team_links = _get_stat_links(url, year)
@@ -50,7 +53,7 @@ def _get_central_team_links(year: int) -> List:
     return team_links
 
 def _get_team_names(url: str, year: int) -> str:
-
+    # Get the team name based on the year and url
     response = session.get(url)
 
     html = response.text
@@ -82,6 +85,7 @@ def get_pacific_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     """
 
     if year is None:
+        # If year is none, get most recent season
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -98,6 +102,7 @@ def get_pacific_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     batting_stats = pd.DataFrame()
     
+    # For each team and link, get team stats as a data frame and combie into one
     for link in team_links:
         url = link
         response = session.get(url)
@@ -136,8 +141,8 @@ def get_central_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     A pandas dataframe with the central league player batting stats from the year entered.
     """
 
-
     if year is None:
+        # If year is none, get most recent stats
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
@@ -154,6 +159,7 @@ def get_central_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     batting_stats = pd.DataFrame()
     
+    # For each team and link, get data frame with stats and combine into one
     for link in team_links:
         url = link
         response = session.get(url)
@@ -196,6 +202,7 @@ def get_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
 
     pacific_batting_stats = get_pacific_batting_stats(year)
 
+    # Combine central batting stats and pacific batting stats into one dataframe
     batting_stats = pd.concat([central_batting_stats, pacific_batting_stats], ignore_index = True)
 
     return batting_stats
