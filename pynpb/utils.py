@@ -8,8 +8,6 @@ import zipfile
 import pandas as pd
 import requests
 
-from . import cache
-
 DATE_FORMAT = "%Y-%m-%d"
 
 @ functools.lru_cache()
