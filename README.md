@@ -22,11 +22,11 @@ pip install -e .
 Next steps will involve having this python package readily available for installation when using anaconda.
 
 ## Next Steps and Improvements
-Any issues with the codebase should be raised and addressed on the GitHub repository. Further inquiries can be asked through (email)[jkmende05@gmail.com]
+Any issues with the codebase should be raised and addressed on the GitHub repository. Further inquiries can be asked through email: jkmende05@gmail.com.
 
 ------
 ## Credit
-This package was created and developed by [Justin Mende]([https://github.com/jkmende05](https://www.linkedin.com/in/justin-mende/)).
+This package was created and developed by [Justin Mende](https://www.linkedin.com/in/justin-mende/).
 
 This package was inspired by the python package called [pybaseball](https://github.com/jldbc/pybaseball) created by James LeDoux. 
 
