@@ -67,6 +67,20 @@ def _get_team_names(url: str, year: int) -> str:
     return team_name
 
 def get_pacific_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player pitching stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league pitching stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -108,6 +122,20 @@ def get_pacific_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pitching_stats
 
 def get_central_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player pitching stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league pitching stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -169,6 +197,20 @@ def _get_first_hidden_html_table(html: str) -> pd.DataFrame:
     return df
 
 def get_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player pitching stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with pitching stats from the year entered.
+    """
+    
     central_pitching_stats = get_central_batting_stats(year)
 
     pacific_pitching_stats = get_pacific_batting_stats(year)
@@ -178,6 +220,23 @@ def get_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pitching_stats
 
 def get_pitching_stats_for_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pitching stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to retrive pitching data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pitching stats for the team and the year entered.
+    """
+
     # Store `most_recent_season()` in a variable to avoid redundant calls
     current_season = most_recent_season()
     

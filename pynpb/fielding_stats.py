@@ -87,6 +87,20 @@ def _get_1b_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_central_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player first base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league first base fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -121,6 +135,20 @@ def get_central_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return first_base_fielding_stats
 
 def get_pacific_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player first base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league first base fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -156,6 +184,20 @@ def get_pacific_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return first_base_fielding_stats
 
 def get_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player first base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the first base fielding stats from the year entered.
+    """
+
     pacific_1b_stats = get_pacific_1b_fielding_stats(year)
 
     central_1b_stats = get_central_1b_fielding_stats(year)
@@ -165,6 +207,23 @@ def get_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return fielding_1b_stats
 
 def get_1b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player first base fielding stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to player first base fielding data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player league first base fielding stats for the team and the year entered.
+    """
+
     current_season = most_recent_season()
     
     if year is None:
@@ -228,6 +287,20 @@ def _get_2b_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_central_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player second base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league second base fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -262,6 +335,20 @@ def get_central_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return second_base_fielding_stats
 
 def get_pacific_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player second base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacifc league second base fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -297,6 +384,20 @@ def get_pacific_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return second_base_fielding_stats
 
 def get_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player second base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player second base fielding stats from the year entered.
+    """
+    
     pacific_2b_stats = get_pacific_2b_fielding_stats(year)
 
     central_2b_stats = get_central_2b_fielding_stats(year)
@@ -306,6 +407,23 @@ def get_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return fielding_2b_stats
 
 def get_2b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player second base fielding stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to player second base fielding data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the second base fielding stats for the team and the year entered.
+    """
+
     current_season = most_recent_season()
     
     if year is None:
@@ -368,6 +486,20 @@ def _get_3b_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_central_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player third base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league third base fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -402,6 +534,20 @@ def get_central_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return third_base_fielding_stats
 
 def get_pacific_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player third base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league third base fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -437,6 +583,20 @@ def get_pacific_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return third_base_fielding_stats
 
 def get_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player third base fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player third base fielding stats from the year entered.
+    """
+
     pacific_3b_stats = get_pacific_3b_fielding_stats(year)
 
     central_3b_stats = get_central_3b_fielding_stats(year)
@@ -446,6 +606,23 @@ def get_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return third_base_fielding_stats
 
 def get_3b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player third base fielding stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to player third base fielding data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the third base fielding stats for the team and the year entered.
+    """
+
     current_season = most_recent_season()
     
     if year is None:
@@ -508,6 +685,20 @@ def _get_ss_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_central_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player shortstop fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league shortstop fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -542,6 +733,20 @@ def get_central_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return shortstop_fielding_stats
 
 def get_pacific_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player shortstop fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league shortstop fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -577,6 +782,20 @@ def get_pacific_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return shortstop_fielding_stats
 
 def get_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player shortstop fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player shortstop fielding stats from the year entered.
+    """
+
     pacific_ss_stats = get_pacific_ss_fielding_stats(year)
 
     central_ss_stats = get_central_ss_fielding_stats(year)
@@ -586,6 +805,23 @@ def get_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return shortstop_fielding_stats
 
 def get_ss_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player shortstop fielding stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to retrive shortstop fielding data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the shortstop fielding stats for the team and the year entered.
+    """
+
     current_season = most_recent_season()
     
     if year is None:
@@ -648,6 +884,20 @@ def _get_of_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_central_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player outfield fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league outfield fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -682,6 +932,20 @@ def get_central_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return outfield_fielding_stats
 
 def get_pacific_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player outfield fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league outfield fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -717,6 +981,20 @@ def get_pacific_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return outfield_fielding_stats
 
 def get_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player outfied fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player outfield fielding stats from the year entered.
+    """
+
     pacific_of_stats = get_pacific_of_fielding_stats(year)
 
     central_of_stats = get_central_of_fielding_stats(year)
@@ -726,6 +1004,23 @@ def get_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return outfield_fielding_stats
 
 def get_of_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player outfield fielding stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to retrive outfield fielding data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the outfield fielding stats for the team and the year entered.
+    """
+
     current_season = most_recent_season()
     
     if year is None:
@@ -788,6 +1083,20 @@ def _get_p_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_central_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player pitcher fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league pitcher fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -822,6 +1131,20 @@ def get_central_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pitching_fielding_stats
 
 def get_pacific_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player pitcher fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league pitcher fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -857,6 +1180,20 @@ def get_pacific_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pitching_fielding_stats
 
 def get_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player pitcher fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player pitcher fielding stats from the year entered.
+    """
+
     pacific_p_stats = get_pacific_p_fielding_stats(year)
 
     central_p_stats = get_central_p_fielding_stats(year)
@@ -866,6 +1203,23 @@ def get_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pitching_fielding_stats
 
 def get_p_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player pitcher fielding stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to retrive pitcher fielding data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pitcher fielding stats for the team and the year entered.
+    """
+
     current_season = most_recent_season()
     
     if year is None:
@@ -928,6 +1282,20 @@ def _get_c_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_central_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player catcher fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league catcher fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -962,6 +1330,20 @@ def get_central_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return catching_fielding_stats
 
 def get_pacific_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player pitcher fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league pitcher fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -997,6 +1379,20 @@ def get_pacific_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return catching_fielding_stats
 
 def get_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player catcher fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player catcher fielding stats from the year entered.
+    """
+
     pacific_c_stats = get_pacific_c_fielding_stats(year)
 
     central_c_stats = get_central_c_fielding_stats(year)
@@ -1006,6 +1402,23 @@ def get_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return catching_fielding_stats
 
 def get_c_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player catcher fielding stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to retrive catcher fielding data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the catcher fielding stats for the team and the year entered.
+    """
+
     current_season = most_recent_season()
     
     if year is None:
@@ -1047,6 +1460,20 @@ def get_c_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.Da
         )
 
 def get_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get all player fielding stats for all positions
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the fielding stats from the year entered.
+    """
+
     print("Warning: Due to website restrictions, please be patient when retrieving stats. Apologies for the inconvenience")
     fielding_stats = pd.DataFrame()
 
@@ -1055,6 +1482,23 @@ def get_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return fielding_stats
 
 def get_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get all player fielding stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to retrive catcher fielding data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the fielding stats for the team and the year entered.
+    """
+
     print("Warning: Due to website restrictions, please be patient when retrieving stats. Apologies for the inconvenience")
     fielding_stats = pd.DataFrame()
 
@@ -1063,6 +1507,20 @@ def get_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.Data
     return fielding_stats
 
 def get_pacific_fielding_stats(year: Optional[int]) -> pd.DataFrame:
+    """
+    Get pacific league player fielding stats for all positions
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league fielding stats from the year entered.
+    """
+
     print("Warning: Due to website restrictions, please be patient when retrieving stats. Apologies for the inconvenience")
     fielding_stats = pd.DataFrame()
 
@@ -1071,6 +1529,20 @@ def get_pacific_fielding_stats(year: Optional[int]) -> pd.DataFrame:
     return fielding_stats
 
 def get_central_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player fielding stats for all positions
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league fielding stats from the year entered.
+    """
+
     print("Warning: Due to website restrictions, please be patient when retrieving stats. Apologies for the inconvenience")
     fielding_stats = pd.DataFrame()
 

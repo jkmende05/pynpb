@@ -19,6 +19,19 @@ def _get_html(year: int) -> str:
     return response.text
 
 def get_active_draft_results(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get NPB active draft results
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the active draft results from the year entered.
+    """
     if year is None:
         year = most_recent_season()
     if year < 1965:

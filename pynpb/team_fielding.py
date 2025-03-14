@@ -71,6 +71,20 @@ def _get_third_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_pacific_team_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league team fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league team fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 2005:
@@ -96,6 +110,20 @@ def get_pacific_team_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pacific_team_fielding
 
 def get_central_team_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league team fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league team fielding stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 2005:
@@ -121,6 +149,20 @@ def get_central_team_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
     return central_team_fielding
 
 def get_team_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get team fielding stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the team fielding stats from the year entered.
+    """
+
     central_team_fielding = get_central_team_fielding_stats(year)
     pacific_team_fielding = get_pacific_team_fielding_stats(year)
 

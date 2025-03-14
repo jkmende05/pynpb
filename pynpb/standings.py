@@ -23,6 +23,20 @@ def _get_html(year: int) -> str:
     return html
 
 def get_pacific_standings(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league standings
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league standings from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -64,6 +78,20 @@ def get_pacific_standings(year: Optional[int] = None) -> pd.DataFrame:
     return pacific_standings
 
 def get_central_standings(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league standings
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league standings from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -105,6 +133,19 @@ def get_central_standings(year: Optional[int] = None) -> pd.DataFrame:
     return central_standings
 
 def get_all_standings(year: Optional[int] = None) -> List[pd.DataFrame]:
+    """
+    Get both central league and pacific league standings as seperate dataframes
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A list of pandas dataframes with the central and pacific league standings from the year entered.
+    """
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -130,6 +171,20 @@ def get_all_standings(year: Optional[int] = None) -> List[pd.DataFrame]:
 
 
 def get_combined_standings(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get overall league standings
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the overall league standings from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:

@@ -71,6 +71,20 @@ def _get_second_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_pacific_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league team pitching stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league team pitching stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -97,6 +111,20 @@ def get_pacific_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pacific_team_pitching
 
 def get_central_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league team pitching stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league team pitching stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -123,6 +151,20 @@ def get_central_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
     return central_team_pitching
 
 def get_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get team pitching stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with team pitching stats from the year entered.
+    """
+
     central_team_pitching = get_central_team_pitching_stats(year)
     pacific_team_pitching = get_pacific_team_pitching_stats(year)
 

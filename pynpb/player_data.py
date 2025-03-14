@@ -34,6 +34,20 @@ def _get_roster_hidden_table(html: str) -> pd.DataFrame:
     return df
 
 def get_pacific_player_data(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player data
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league player data from the year entered.
+    """
+    
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -66,6 +80,20 @@ def get_pacific_player_data(year: Optional[int] = None) -> pd.DataFrame:
     return roster_data
 
 def get_central_player_data(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player data
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league player data from the year entered.
+    """
+    
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -98,6 +126,20 @@ def get_central_player_data(year: Optional[int] = None) -> pd.DataFrame:
     return roster_data
 
 def get_player_data(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player datta
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with pitching data from the year entered.
+    """
+
     pacific_data = get_pacific_player_data(year)
 
     central_data = get_central_player_data(year)
@@ -107,6 +149,23 @@ def get_player_data(year: Optional[int] = None) -> pd.DataFrame:
     return player_data
 
 def get_player_data_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player data for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to retrive pitching data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player data for the team and the year entered.
+    """
+
     pacific_data = get_pacific_player_data(year)
 
     central_data = get_central_player_data(year)

@@ -70,6 +70,20 @@ def _get_first_hidden_html_table(html: str) -> pd.DataFrame:
     return df
 
 def get_pacific_team_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league team batting stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league team batting stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -96,6 +110,20 @@ def get_pacific_team_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     return pacific_team_batting
 
 def get_central_team_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league team batting stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league team batting stats from the year entered.
+    """
+    
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -122,6 +150,20 @@ def get_central_team_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     return central_team_batting
 
 def get_team_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get team batting stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the team batting stats from the year entered.
+    """
+
     central_team_batting = get_central_team_batting_stats(year)
     pacific_team_batting = get_pacific_team_batting_stats(year)
 

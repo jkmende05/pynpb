@@ -19,7 +19,7 @@ def _get_html(year: int) -> str:
 
     return response.text
 
-def get_draft_round_names(year: int, html: str) -> List:
+def _get_draft_round_names(year: int, html: str) -> List:
     soup = BeautifulSoup(html, 'html.parser')
 
     draft_rounds = soup.find_all('span', class_='mw-headline')
@@ -28,6 +28,20 @@ def get_draft_round_names(year: int, html: str) -> List:
     return draft_rounds_list
 
 def get_draft_results(year: Optional[int] = None) -> dict:
+    """
+    Get NPB amateur draft results
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the amateur draft results from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1965:
@@ -57,6 +71,23 @@ def get_draft_results(year: Optional[int] = None) -> dict:
     return draft_rounds
 
 def get_round_results(round: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get NPB amateur draft results for the round entered
+    
+    Parameters
+    ----------
+    round: str
+        A string value representing the round of the draft for which to retrieve data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the amateur draft results from the round and year entered.
+    """
+
     draft_results = get_draft_results(year)
 
     try:
@@ -70,6 +101,23 @@ def get_round_results(round: str, year: Optional[int] = None) -> pd.DataFrame:
     return round_results
 
 def get_draft_results_by_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get NPB amateur draft results for the team entered
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the NPB team for which to retrieve data.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the amateur draft results for the desired team and year.
+    """
+
     data = get_draft_results(year)
 
     draft_df = []

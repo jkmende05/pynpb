@@ -67,6 +67,20 @@ def _get_team_names(url: str, year: int) -> str:
     return team_name
 
 def get_pacific_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get pacific league player batting stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the pacific league player batting stats from the year entered.
+    """
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -108,6 +122,21 @@ def get_pacific_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     return batting_stats
 
 def get_central_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get central league player batting stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the central league player batting stats from the year entered.
+    """
+
+
     if year is None:
         year = most_recent_season()
     if year < 1950:
@@ -149,6 +178,20 @@ def get_central_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     return batting_stats
 
 def get_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player batting stats
+    
+    Parameters
+    ----------
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player batting stats from the year entered.
+    """
+
     central_batting_stats = get_central_batting_stats(year)
 
     pacific_batting_stats = get_pacific_batting_stats(year)
@@ -158,6 +201,22 @@ def get_batting_stats(year: Optional[int] = None) -> pd.DataFrame:
     return batting_stats
 
 def get_batting_stats_for_team(team: str, year: Optional[int] = None) -> pd.DataFrame:
+    """
+    Get player batting stats for a specific team
+    
+    Parameters
+    ----------
+    team: str
+        A string value representing the team name for which to retrieve player batting stats.
+
+    year: int, optional
+        An integer value representing the year for which to retrieve data. If not entered, results from
+        most recent season will be retrieved.
+
+    Returns
+    -------
+    A pandas dataframe with the player batting stats for the team and the year entered.
+    """
 
     # Store `most_recent_season()` in a variable to avoid redundant calls
     current_season = most_recent_season()
