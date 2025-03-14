@@ -81,8 +81,8 @@ def _get_1b_hidden_table(html: str) -> pd.DataFrame:
             tables.extend(tables_in_comment)
 
     if len(tables) >= 2:
-        second_table_html = str(tables[1])
-        df = pd.read_html(StringIO(second_table_html))[0]
+        hidden_table = str(tables[1])
+        df = pd.read_html(StringIO(hidden_table))[0]
         
     return df
 
@@ -91,7 +91,7 @@ def get_central_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -125,7 +125,7 @@ def get_pacific_1b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -171,7 +171,7 @@ def get_1b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
         year = current_season
     if year < 1950:
         raise ValueError(
-            "This query currently only returns standings until the 1950 Season. "
+            "This query currently only returns fielding stats after the 1950 Season. "
             "This was the first season where the Pacific and Central Leagues were created. "
             "Try looking at years from 1950 to present."
         )
@@ -222,8 +222,8 @@ def _get_2b_hidden_table(html: str) -> pd.DataFrame:
             tables.extend(tables_in_comment)
 
     if len(tables) >= 2:
-        second_table_html = str(tables[2])  # second hidden table
-        df = pd.read_html(StringIO(second_table_html))[0]
+        hidden_table = str(tables[2])
+        df = pd.read_html(StringIO(hidden_table))[0]
         
     return df
 
@@ -232,7 +232,7 @@ def get_central_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -266,7 +266,7 @@ def get_pacific_2b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -312,7 +312,7 @@ def get_2b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
         year = current_season
     if year < 1950:
         raise ValueError(
-            "This query currently only returns standings until the 1950 Season. "
+            "This query currently only returns fielding stats after the 1950 Season. "
             "This was the first season where the Pacific and Central Leagues were created. "
             "Try looking at years from 1950 to present."
         )
@@ -362,8 +362,8 @@ def _get_3b_hidden_table(html: str) -> pd.DataFrame:
             tables.extend(tables_in_comment)
             
     if len(tables) >= 2:
-        second_table_html = str(tables[3]) 
-        df = pd.read_html(StringIO(second_table_html))[0]
+        hidden_table = str(tables[3]) 
+        df = pd.read_html(StringIO(hidden_table))[0]
         
     return df
 
@@ -372,7 +372,7 @@ def get_central_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -406,7 +406,7 @@ def get_pacific_3b_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -452,7 +452,7 @@ def get_3b_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
         year = current_season
     if year < 1950:
         raise ValueError(
-            "This query currently only returns standings until the 1950 Season. "
+            "This query currently only returns fielding stats after the 1950 Season. "
             "This was the first season where the Pacific and Central Leagues were created. "
             "Try looking at years from 1950 to present."
         )
@@ -502,8 +502,8 @@ def _get_ss_hidden_table(html: str) -> pd.DataFrame:
             tables.extend(tables_in_comment)
             
     if len(tables) >= 2:
-        second_table_html = str(tables[4]) 
-        df = pd.read_html(StringIO(second_table_html))[0]
+        hidden_table = str(tables[4]) 
+        df = pd.read_html(StringIO(hidden_table))[0]
         
     return df
 
@@ -512,7 +512,7 @@ def get_central_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -546,7 +546,7 @@ def get_pacific_ss_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -592,7 +592,7 @@ def get_ss_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
         year = current_season
     if year < 1950:
         raise ValueError(
-            "This query currently only returns standings until the 1950 Season. "
+            "This query currently only returns fielding stats after the 1950 Season. "
             "This was the first season where the Pacific and Central Leagues were created. "
             "Try looking at years from 1950 to present."
         )
@@ -642,8 +642,8 @@ def _get_of_hidden_table(html: str) -> pd.DataFrame:
             tables.extend(tables_in_comment)
             
     if len(tables) >= 2:
-        second_table_html = str(tables[5]) 
-        df = pd.read_html(StringIO(second_table_html))[0]
+        hidden_table = str(tables[5]) 
+        df = pd.read_html(StringIO(hidden_table))[0]
         
     return df
 
@@ -652,7 +652,7 @@ def get_central_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats until the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -686,7 +686,7 @@ def get_pacific_of_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -732,7 +732,7 @@ def get_of_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.D
         year = current_season
     if year < 1950:
         raise ValueError(
-            "This query currently only returns standings until the 1950 Season. "
+            "This query currently only returns fielding stats after the 1950 Season. "
             "This was the first season where the Pacific and Central Leagues were created. "
             "Try looking at years from 1950 to present."
         )
@@ -782,8 +782,8 @@ def _get_p_hidden_table(html: str) -> pd.DataFrame:
             tables.extend(tables_in_comment)
             
     if len(tables) >= 2:
-        second_table_html = str(tables[6]) 
-        df = pd.read_html(StringIO(second_table_html))[0]
+        hidden_table = str(tables[6]) 
+        df = pd.read_html(StringIO(hidden_table))[0]
         
     return df
 
@@ -792,7 +792,7 @@ def get_central_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -826,7 +826,7 @@ def get_pacific_p_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -872,7 +872,7 @@ def get_p_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.Da
         year = current_season
     if year < 1950:
         raise ValueError(
-            "This query currently only returns standings until the 1950 Season. "
+            "This query currently only returns fielding stats after the 1950 Season. "
             "This was the first season where the Pacific and Central Leagues were created. "
             "Try looking at years from 1950 to present."
         )
@@ -922,8 +922,8 @@ def _get_c_hidden_table(html: str) -> pd.DataFrame:
             tables.extend(tables_in_comment)
             
     if len(tables) >= 2:
-        second_table_html = str(tables[7]) 
-        df = pd.read_html(StringIO(second_table_html))[0]
+        hidden_table = str(tables[7]) 
+        df = pd.read_html(StringIO(hidden_table))[0]
         
     return df
 
@@ -932,7 +932,7 @@ def get_central_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -966,7 +966,7 @@ def get_pacific_c_fielding_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns fielding stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -1012,7 +1012,7 @@ def get_c_fielding_stats_by_team(team: str, year: Optional[int] = None) -> pd.Da
         year = current_season
     if year < 1950:
         raise ValueError(
-            "This query currently only returns standings until the 1950 Season. "
+            "This query currently only returns fielding stats after the 1950 Season. "
             "This was the first season where the Pacific and Central Leagues were created. "
             "Try looking at years from 1950 to present."
         )

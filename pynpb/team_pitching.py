@@ -75,7 +75,7 @@ def get_pacific_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns team pitching stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
@@ -101,7 +101,7 @@ def get_central_team_pitching_stats(year: Optional[int] = None) -> pd.DataFrame:
         year = most_recent_season()
     if year < 1950:
         raise ValueError(
-                "This query currently only returns standings until the 1950 Season. "
+                "This query currently only returns team pitching stats after the 1950 Season. "
                 "This was the first season where the Pacific and Central Leagues were created."
                 "Try looking at years from 1950 to present."
         )
